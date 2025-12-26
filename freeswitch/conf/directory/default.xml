@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<include>
+  <domain name="$${domain}">
+    <params>
+      <param name="dial-string" value="{presence_id=${dialed_user}@${dialed_domain}}${sofia_contact(${dialed_user}@${dialed_domain})}"/>
+    </params>
+    <groups>
+      <group name="default">
+        <users>
+  <user id="1000">
+    <params>
+      <param name="password" value="1234"/>
+      <param name="vm-password" value="1000"/>
+    </params>
+    <variables>
+      <variable name="toll_allow" value="domestic,international,local"/>
+      <variable name="accountcode" value="1000"/>
+      <variable name="user_context" value="default"/>
+      <variable name="effective_caller_id_name" value="Agent 1000"/>
+      <variable name="effective_caller_id_number" value="1000"/>
+    </variables>
+  </user>
+
+  <user id="1001">
+    <params>
+      <param name="password" value="1234"/>
+    </params>
+    <variables>
+      <variable name="effective_caller_id_name" value="Agent 1001"/>
+      <variable name="effective_caller_id_number" value="1001"/>
+    </variables>
+  </user>
+
+  <user id="1002">
+    <params>
+      <param name="password" value="1234"/>
+    </params>
+    <variables>
+      <variable name="effective_caller_id_name" value="Agent 1002"/>
+      <variable name="effective_caller_id_number" value="1002"/>
+    </variables>
+  </user>
+
+  <user id="1004">
+    <params>
+      <param name="password" value="1234"/>
+    </params>
+    <variables>
+      <variable name="effective_caller_id_name" value="Manager 1004"/>
+      <variable name="effective_caller_id_number" value="1004"/>
+    </variables>
+  </user>
+
+  <user id="1005">
+    <params>
+      <param name="password" value="1234"/>
+    </params>
+    <variables>
+      <variable name="effective_caller_id_name" value="Manager 1005"/>
+      <variable name="effective_caller_id_number" value="1005"/>
+    </variables>
+  </user>
+
+  <user id="1006">
+    <params>
+      <param name="password" value="1234"/>
+    </params>
+    <variables>
+      <variable name="effective_caller_id_name" value="Agent 1006"/>
+      <variable name="effective_caller_id_number" value="1006"/>
+    </variables>
+  </user>
+
+  <user id="1007">
+    <params>
+      <param name="password" value="1234"/>
+    </params>
+    <variables>
+      <variable name="effective_caller_id_name" value="Agent 1007"/>
+      <variable name="effective_caller_id_number" value="1007"/>
+    </variables>
+  </user>
+
+  <user id="1008">
+    <params>
+      <param name="password" value="1234"/>
+    </params>
+    <variables>
+      <variable name="effective_caller_id_name" value="Agent 1008"/>
+      <variable name="effective_caller_id_number" value="1008"/>
+    </variables>
+  </user>
+
+  <user id="1009">
+    <params>
+      <param name="password" value="1234"/>
+    </params>
+    <variables>
+      <variable name="effective_caller_id_name" value="Agent 1009"/>
+      <variable name="effective_caller_id_number" value="1009"/>
+    </variables>
+  </user>
+
+  <user id="1010">
+    <params>
+      <param name="password" value="1234"/>
+    </params>
+    <variables>
+      <variable name="effective_caller_id_name" value="Agent 1010"/>
+      <variable name="effective_caller_id_number" value="1010"/>
+    </variables>
+  </user>
+        </users>
+      </group>
+    </groups>
+  </domain>
+</include>

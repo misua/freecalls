@@ -1,0 +1,6 @@
+redis>=5.0.0
+python-dotenv>=1.0.0
+greenswitch==0.0.19
+dramatiq[redis]>=1.15.0
+psycopg2-binary>=2.9.0
+gevent>=24.2.1

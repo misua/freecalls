@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration name="conference.conf" description="Conference Configuration">
+  <caller-controls>
+    <group name="default">
+      <control action="mute" digits="0"/>
+      <control action="deaf mute" digits="*"/>
+      <control action="hangup" digits="#"/>
+    </group>
+  </caller-controls>
+
+  <profiles>
+    <profile name="default">
+      <!-- Sample rate in Hz -->
+      <param name="rate" value="8000"/>
+      
+      <!-- Milliseconds of audio per frame -->
+      <param name="interval" value="20"/>
+      
+      <!-- Energy level for audio to be considered speech -->
+      <param name="energy-level" value="300"/>
+      
+      <!-- Comfort noise to prevent dead silence -->
+      <param name="comfort-noise" value="true"/>
+      
+      <!-- Allow callers to hear themselves -->
+      <param name="caller-controls" value="default"/>
+      
+      <!-- Maximum number of members -->
+      <param name="max-members" value="10"/>
+      
+      <!-- Auto gain control -->
+      <param name="auto-gain-control" value="true"/>
+      
+      <!-- Terminate conference when all members leave -->
+      <param name="endconf-grace-time" value="0"/>
+    </profile>
+  </profiles>
+</configuration>

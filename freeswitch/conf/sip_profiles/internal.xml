@@ -1,0 +1,23 @@
+<include>
+  <profile name="internal">
+    <settings>
+      <param name="sip-port" value="5060"/>
+      <param name="rtp-ip" value="$${local_ip_v4}"/>
+      <param name="sip-ip" value="$${local_ip_v4}"/>
+      <param name="context" value="default"/>
+      <param name="dialplan" value="XML"/>
+      <param name="dtmf-duration" value="2000"/>
+      <param name="inbound-codec-prefs" value="PCMU,PCMA"/>
+      <param name="outbound-codec-prefs" value="PCMU,PCMA"/>
+      <param name="rtp-timer-name" value="soft"/>
+      <param name="local-network-acl" value="localnet.auto"/>
+      <param name="manage-presence" value="true"/>
+      <param name="inbound-codec-negotiation" value="generous"/>
+      <param name="nonce-ttl" value="60"/>
+      <param name="auth-calls" value="true"/>
+      <param name="apply-inbound-acl" value="domains"/>
+      <param name="log-auth-failures" value="true"/>
+      <param name="debug" value="0"/>
+    </settings>
+  </profile>
+</include>

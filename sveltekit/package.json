@@ -1,0 +1,30 @@
+{
+  "name": "freecalls-dashboard",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "vite dev --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-node": "^5.0.1",
+    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "svelte": "^4.2.8",
+    "svelte-check": "^3.6.2",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11"
+  },
+  "dependencies": {
+    "redis": "^4.6.12",
+    "postgres": "^3.4.3",
+    "chart.js": "^4.4.1",
+    "svelte-chartjs": "^3.1.5"
+  },
+  "type": "module"
+}

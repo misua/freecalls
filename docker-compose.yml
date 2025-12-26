@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  freeswitch:
+    image: ghcr.io/patrickbaus/freeswitch-docker:latest
+    container_name: freecalls-freeswitch
+    network_mode: host
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - ./freeswitch/conf:/etc/freeswitch
+      - ./freeswitch/recordings:/var/log/freeswitch
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: freecalls-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    restart: unless-stopped
+
+  timescaledb:
+    image: timescale/timescaledb-ha:pg16
+    container_name: freecalls-timescaledb
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=freecalls
+      - POSTGRES_USER=freecalls
+      - POSTGRES_PASSWORD=freecalls_secure_password
+    volumes:
+      - postgres-data:/home/postgres/pgdata/data
+      - ./docker/timescaledb/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U freecalls"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  orchestrator:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    container_name: freecalls-orchestrator
+    depends_on:
+      - freeswitch
+      - redis
+      - timescaledb
+    environment:
+      - REDIS_URL=redis://localhost:6379
+      - FREESWITCH_HOST=localhost
+      - FREESWITCH_PORT=8021
+      - ESL_PASSWORD=ClueCon
+      - DATABASE_URL=postgresql://freecalls:freecalls_secure_password@localhost:5432/freecalls
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./python:/app
+
+  worker:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    container_name: freecalls-worker
+    depends_on:
+      - redis
+      - timescaledb
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://freecalls:freecalls_secure_password@timescaledb:5432/freecalls
+      - HUBSPOT_API_KEY=${HUBSPOT_API_KEY:-}
+    command: dramatiq workers.tasks --processes 4 --threads 8
+    restart: unless-stopped
+    volumes:
+      - ./python:/app
+      - ./freeswitch/recordings:/recordings
+
+  dashboard:
+    build:
+      context: ./sveltekit
+      dockerfile: Dockerfile
+    container_name: freecalls-dashboard
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+      - timescaledb
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://freecalls:freecalls_secure_password@timescaledb:5432/freecalls
+    restart: unless-stopped
+    volumes:
+      - ./sveltekit:/app
+      - /app/node_modules
+
+volumes:
+  postgres-data:

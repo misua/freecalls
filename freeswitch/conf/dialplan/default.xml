@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<include>
+  <context name="default">
+    <!-- Inbound call parking extension -->
+    <extension name="call_parking">
+    <condition field="destination_number" expression="^(5000)$">
+      <!-- Set call UUID as channel variable -->
+      <action application="set" data="call_uuid=${uuid}"/>
+      
+      <!-- Set caller ID info -->
+      <action application="set" data="effective_caller_id_number=${caller_id_number}"/>
+      <action application="set" data="effective_caller_id_name=${caller_id_name}"/>
+      
+      <!-- Answer the call -->
+      <action application="answer"/>
+      
+      <!-- Park the call (plays hold music) -->
+      <action application="park"/>
+    </condition>
+  </extension>
+
+  <!-- Agent extensions (1000-1019) -->
+  <extension name="agent_extensions">
+    <condition field="destination_number" expression="^(10[0-1][0-9])$">
+      <action application="bridge" data="user/$1"/>
+    </condition>
+  </extension>
+
+  <!-- Dynamic conference rooms (3100-3199) -->
+  <extension name="dynamic_conference">
+    <condition field="destination_number" expression="^(31\d{2})$">
+      <action application="conference" data="$1@default"/>
+    </condition>
+  </extension>
+  </context>
+</include>

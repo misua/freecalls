@@ -1,0 +1,77 @@
+# Recordings
+freeswitch/recordings/
+*.wav
+*.mp3
+*.gsm
+
+# Logs
+*.log
+logs/
+freeswitch/recordings/freeswitch.history
+freeswitch/recordings/freeswitch.xml.fsxml
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Node.js / SvelteKit
+node_modules/
+sveltekit/node_modules/
+sveltekit/.svelte-kit/
+sveltekit/build/
+sveltekit/build_backup/
+sveltekit/.turbo/
+*.tsbuildinfo
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Redis data
+redis-data/
+*.rdb
+*.aof
+
+# PostgreSQL / TimescaleDB
+postgres-data/
+*.dump
+*.sql.backup
+
+# Docker volumes
+.docker/
+docker-compose.override.yml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+.fleet/
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Misc
+*.orig
+.cache/
